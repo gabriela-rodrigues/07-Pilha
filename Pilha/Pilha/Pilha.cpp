@@ -5,6 +5,7 @@ using namespace std;
 struct NO {
 	int valor;
 	NO* prox;
+	NO* aux = NULL;
 };
 
 NO* topo = NULL;
@@ -59,7 +60,7 @@ void menu()
 void inicializar()
 {
 
-	// se a lista já possuir elementos
+	// se a lista jï¿½ possuir elementos
 	// libera a memoria ocupada
 	NO* aux = topo;
 	while (aux != NULL) {
@@ -76,24 +77,30 @@ void inicializar()
 
 void push()
 {
-	// aloca memoria dinamicamente para o novo elemento
-	NO* novo = (NO*)malloc(sizeof(NO));
-	if (novo == NULL)
-	{
-		return;
-	}
+    NO* novo = (NO*)malloc(sizeof(NO));
+    if (novo == NULL)
+    {
+        return;
+    }
 
-	cout << "Digite o elemento: ";
-	cin >> novo->valor;
-	novo->prox = NULL;
-
-
+    cout << "Digite o elemento: ";
+    cin >> novo->valor;
+    novo->prox = topo; 
+    topo = novo; 
 }
 
 void pop()
 {
+    if (topo == NULL) 
+    {
+        cout << "Pilha Vazia\n";
+        return;
+    }
 
-	
-
+    cout << "Elemento removido: " << topo->valor << endl;
+    NO* paraExcluir = topo;
+    topo = topo->prox; 
+    free(paraExcluir); 
 }
+
 
